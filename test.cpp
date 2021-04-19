@@ -1,4 +1,4 @@
-#include "debug.h"
+#include "test.h"
 void test::input()
 {
 	getline(std::cin, data);

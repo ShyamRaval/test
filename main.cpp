@@ -1,14 +1,16 @@
 #include "test.h"
 int main()
 {
-	shyam::game g1;
-	while (g1.game_status)
+	shyam::game instance;
+	instance.game_status = 1;
+	while (instance.game_status)
 	{
-		while (g1.is_move_oku())
+		while (instance.is_move_oku())
 		{
-			g1.status();
-			g1.get_input();
-			g1.process();
+			instance.status();
+			instance.get_input();
+			instance.process();
 		}
+		instance.move = 1;
 	}
 }

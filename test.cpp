@@ -7,10 +7,21 @@ void shyam::game::status()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if (pointer==&check_type[i][j])
-				std::cout << check_type[i][j] << "<-  ";
+			if (check_space[i][j] == 1)
+			{
+				if (data_pointer == &check_space[i][j])
+					std::cout << check_type[i][j] << "<-  ";
+				else
+					std::cout << check_type[i][j] << "    ";
+			}
 			else
-				std::cout << check_type[i][j] << "    ";
+			{
+				if (data_pointer == &check_space[i][j])
+					std::cout <<  "*<-  ";
+				else
+					std::cout <<  "*    ";
+			
+			}
 		}
 		std::cout << std::endl;
 		std::cout << std::endl;
@@ -22,37 +33,42 @@ void shyam::game::get_input()
 {
 	std::cin >> move;
 }
-bool shyam::game::process()
+void shyam::game::process()
 {
 	switch (move)
 	{
 	case 119:
 		std::cout << "w" << std::endl;
-		pointer = pointer - 3;
+		if(!(data_pointer < &check_space[1][0]))
+		data_pointer = data_pointer - 3;
 		break;
 	case 97:
 		std::cout << "a" << std::endl;
-		if (pointer != &check_space[0][0])
-		pointer = pointer - 1;
+		if (data_pointer != &check_space[0][0])
+		data_pointer = data_pointer - 1;
 		break;
 	case 115:
 		std::cout << "s" << std::endl;
-		pointer = pointer + 3;
+		if (!(data_pointer > &check_space[1][2]))
+		data_pointer = data_pointer + 3;
 		break;
 	case 100:
 		std::cout << "d" << std::endl;
-		if(pointer!=&check_space[2][2])
-		pointer = pointer + 1;
+		if(data_pointer!=&check_space[2][2])
+		data_pointer = data_pointer + 1;
 		break;
 	case 111:
 		std::cout << "Enter oku" << std::endl;
-		//if()
+		if (0 == check_space[shyam::game::return_i()][shyam::game::return_j()])
+		{
+			check_space[shyam::game::return_i()][shyam::game::return_j()] = 1;
+			check_type[shyam::game::return_i()][shyam::game::return_j()] = turn;
+			change_turn();
+		}
 		break;
 	default:
-		return 1;
 		break;
 	}
-	return 0;
 }
 
 bool shyam::game::is_move_oku()
@@ -61,4 +77,19 @@ bool shyam::game::is_move_oku()
 		return 0;
 	else
 		return 1;
+}
+void shyam::game::change_turn()
+{
+	if (turn == 0)
+		turn = 1;
+	else
+		turn = 0;
+}
+int shyam::game::return_i()
+{
+	return (data_pointer - &check_space[0][0]) / 3;
+}
+int shyam::game::return_j()
+{
+	return (data_pointer - &check_space[0][0]) % 3;
 }

@@ -5,17 +5,22 @@ namespace shyam
 	class game
 	{
 	private:
+	public:
 		//grid 
 		bool check_space[3][3] =
 		{
 			{0,0,0},
-			{1,1,1},
+			{0,0,0},
 			{0,0,0}
 		};
 		//grid type
-		bool check_type[2][2];
+		bool check_type[3][3]
+		{	{0, 0, 0},
+			{0, 0, 0},
+			{0, 0, 0}			
+		};
 		//pointer for grid
-		bool* pointer = &check_space[0][0];
+		bool* data_pointer = &check_space[0][0];
 		//bool for turn 0=o, 1=x
 		bool turn=0;
 		//char input variable for moving
@@ -28,10 +33,16 @@ namespace shyam
 		//shows status of the grid
 		void status();
 		//gameplay processor
-		bool process();
+		void process();
 		//edits the grid 
 		void write();
 		//checks if move == oku
 		bool is_move_oku();
+		//change turn
+		void change_turn();
+		//reutrn i of space
+		int return_i();
+		//return j of space
+		int return_j();
 	};
 }

@@ -1,11 +1,37 @@
 #pragma once 
 #include <iostream>
-#include <string>
-class test
+namespace shyam
 {
-private:
-	std::string data;
-public:
-	void input();
-	void output();
-};
+	class game
+	{
+	private:
+		//grid 
+		bool check_space[3][3] =
+		{
+			{0,0,0},
+			{1,1,1},
+			{0,0,0}
+		};
+		//grid type
+		bool check_type[2][2];
+		//pointer for grid
+		bool* pointer = &check_space[0][0];
+		//bool for turn 0=o, 1=x
+		bool turn=0;
+		//char input variable for moving
+		char move;
+	public:
+		//window status 0=close 
+		bool game_status = 1;
+		//takes input 
+		void get_input();
+		//shows status of the grid
+		void status();
+		//gameplay processor
+		bool process();
+		//edits the grid 
+		void write();
+		//checks if move == oku
+		bool is_move_oku();
+	};
+}
